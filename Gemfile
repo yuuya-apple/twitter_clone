@@ -44,6 +44,8 @@ gem 'jbuilder'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
+gem 'devise', '~> 4.9'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
@@ -85,4 +87,5 @@ group :test do
   gem 'webdrivers'
 end
 
-gem 'devise', '~> 4.9'
+gem 'html2slim-ruby3', '~> 0.2.1'
+gem 'slim-rails', '~> 3.6'
