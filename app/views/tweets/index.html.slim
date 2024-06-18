@@ -1,0 +1,7 @@
+h1
+  = current_user.display_name
+=form_with(scope: :tweet) do |f|
+  .form_group
+    =f.text_area :content
+  .form_group
+    =f.submit 'ツイート'
