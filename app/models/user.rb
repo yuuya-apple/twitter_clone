@@ -8,4 +8,6 @@ class User < ApplicationRecord
 
   validates :tell_number, presence: true
   validates :date_of_birth, presence: true
+
+  has_many :tweets, dependent: :destroy
 end
