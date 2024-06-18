@@ -1,19 +1,23 @@
-h2
+h1.h3.mb-3.fw-normal
   | Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+= form_with(model: @user, url: user_registration_path,local: true) do |f|
   = render "users/shared/error_messages", resource: resource
+  br
   .field
     = f.label :email
-  br
   = f.email_field :email, autofocus: true, autocomplete: "email"
+  br
+  br
   .field
     = f.label :tell_number
-  br
   = f.number_field :tell_number, autofocus: true, autocomplete: "tell_number"
+  br
+  br
   .field
     = f.label :date_of_birth
-  br
   = f.date_select :date_of_birth, autofocus: true, autocomplete: "date_of_birth"
+  br
+  br
   .field
     = f.label :password
     - if @minimum_password_length
@@ -21,12 +25,14 @@ h2
         | (
         = @minimum_password_length
         |  characters minimum)
-  br
   = f.password_field :password, autocomplete: "new-password"
+  br
+  br
   .field
     = f.label :password_confirmation
-  br
   = f.password_field :password_confirmation, autocomplete: "new-password"
   .actions
     = f.submit "Sign up"
+  br
+  br
 = render "users/shared/links"
