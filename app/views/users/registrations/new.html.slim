@@ -6,18 +6,12 @@ h1.h3.mb-3.fw-normal
   .field
     = f.label :email
   = f.email_field :email, autofocus: true, autocomplete: "email"
-  br
-  br
   .field
     = f.label :tell_number
   = f.number_field :tell_number, autofocus: true, autocomplete: "tell_number"
-  br
-  br
   .field
     = f.label :date_of_birth
   = f.date_select :date_of_birth, autofocus: true, autocomplete: "date_of_birth"
-  br
-  br
   .field
     = f.label :password
     - if @minimum_password_length
@@ -26,8 +20,6 @@ h1.h3.mb-3.fw-normal
         = @minimum_password_length
         |  characters minimum)
   = f.password_field :password, autocomplete: "new-password"
-  br
-  br
   .field
     = f.label :password_confirmation
   = f.password_field :password_confirmation, autocomplete: "new-password"
