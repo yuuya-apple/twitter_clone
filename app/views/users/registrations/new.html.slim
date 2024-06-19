@@ -1,0 +1,30 @@
+h1.h3.mb-3.fw-normal
+  | Sign up
+= form_with(model: @user, url: user_registration_path,local: true) do |f|
+  = render "users/shared/error_messages", resource: resource
+  br
+  .field
+    = f.label :email
+  = f.email_field :email, autofocus: true, autocomplete: "email"
+  .field
+    = f.label :tell_number
+  = f.number_field :tell_number, autofocus: true, autocomplete: "tell_number"
+  .field
+    = f.label :date_of_birth
+  = f.date_select :date_of_birth, autofocus: true, autocomplete: "date_of_birth"
+  .field
+    = f.label :password
+    - if @minimum_password_length
+      em
+        | (
+        = @minimum_password_length
+        |  characters minimum)
+  = f.password_field :password, autocomplete: "new-password"
+  .field
+    = f.label :password_confirmation
+  = f.password_field :password_confirmation, autocomplete: "new-password"
+  .actions
+    = f.submit "Sign up"
+  br
+  br
+= render "users/shared/links"
