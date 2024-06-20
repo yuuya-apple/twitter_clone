@@ -87,5 +87,4 @@ group :test do
   gem 'webdrivers'
 end
 
-gem 'html2slim-ruby3', '~> 0.2.1'
 gem 'slim-rails', '~> 3.6'
