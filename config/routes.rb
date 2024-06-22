@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get '/logout', to: 'users#index'
 
   devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks',
     sessions: 'users/sessions',
     registrations: 'users/registrations',
     confirmations: 'users/confirmations'
