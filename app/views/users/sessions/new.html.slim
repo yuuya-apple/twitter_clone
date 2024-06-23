@@ -2,17 +2,16 @@ h1.h3.mb-3.fw-normal
   | Log in
 = form_with(model: @user, url: user_session_path,local: true) do |f|
   .form-floating
-    = f.email_field :email, autofocus: true, autocomplete: "email",id:"floatingInput",class:"form-control",placeholder:"name@example.com"
-    = f.label :email,for:"floatingInput"
+    = f.email_field :email, autofocus: true, autocomplete: "email",class:"form-control",placeholder:"name@example.com"
+    = f.label :email
   .form-floating
-    = f.password_field :password, autocomplete: "current-password",id:"floatingInput",class:"form-control",placeholder:"Password"
-    = f.label :password,for:"floatingInput"
+    = f.password_field :password, autocomplete: "current-password",class:"form-control",placeholder:"Password"
+    = f.label :password
   - if devise_mapping.rememberable?
     .form-check.text-start.my-3
       = f.check_box :remember_me,id:"flexCheckDefault",class:"form-check-input"
       = f.label :remember_me ,for:"flexCheckDefault",class:"form-check-label"
   .actions
-    = f.submit "Log in"
-  br
+    = f.submit "Log in",class:"form-control btn btn-dark"
   br
 = render "users/shared/links"

@@ -2,29 +2,26 @@ h1.h3.mb-3.fw-normal
   | Sign up
 = form_with(model: @user, url: user_registration_path,local: true) do |f|
   = render "users/shared/error_messages", resource: resource
-  br
-  .field
+  .form-floating
+    = f.email_field :email, autofocus: true, autocomplete: "email",class:"form-control",placeholder:"name@example.com"
     = f.label :email
-  = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
+  .form-floating
+    = f.number_field :tell_number, autocomplete: "tell_number",class:"form-control",placeholder:""
     = f.label :tell_number
-  = f.number_field :tell_number, autofocus: true, autocomplete: "tell_number"
-  .field
+  .form-floating
+    = f.date_field :date_of_birth, class: 'form-control'
     = f.label :date_of_birth
-  = f.date_select :date_of_birth, autofocus: true, autocomplete: "date_of_birth"
-  .field
+  .form-floating
+    = f.password_field :password,class:"form-control",autocomplete: "new-password",placeholder:""
     = f.label :password
     - if @minimum_password_length
       em
         | (
         = @minimum_password_length
         |  characters minimum)
-  = f.password_field :password, autocomplete: "new-password"
-  .field
+  .form-floating
+    = f.password_field :password_confirmation,class:"form-control",autocomplete: "new-password",placeholder:""
     = f.label :password_confirmation
-  = f.password_field :password_confirmation, autocomplete: "new-password"
   .actions
-    = f.submit "Sign up"
-  br
-  br
+    = f.submit "Sign up",class:"form-control btn btn-dark"
 = render "users/shared/links"
