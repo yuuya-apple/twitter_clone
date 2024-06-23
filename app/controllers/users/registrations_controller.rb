@@ -43,6 +43,17 @@ module Users
 
     protected
 
+    def build_resource(hash = {})
+      hash[:uid] = User.create_unique_string
+      super
+    end
+
+    def update_resource(resource, params)
+      return super if params['password'].present?
+
+      resource.update_without_password(params.except('current_password'))
+    end
+
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
       devise_parameter_sanitizer.permit(:sign_up, keys: %i[tell_number date_of_birth])
