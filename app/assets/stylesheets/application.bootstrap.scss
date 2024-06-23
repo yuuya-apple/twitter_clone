@@ -3,7 +3,12 @@
 
 html,
 body {
-  height: 100%;
+  height: 100vh;
+}
+main {
+  max-height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .form-signin {
@@ -26,6 +31,8 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-main > .container {
-  padding: 60px 15px 0;
+
+.textarea-vertical {
+  @extend textarea !optional;
+  resize: none;
 }
