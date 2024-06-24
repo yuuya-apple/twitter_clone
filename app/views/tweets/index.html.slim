@@ -1,18 +1,16 @@
-.d-flex.flex-column.flex-shrink-0.border-end
-  .list-group.list-group-flush.overflow-auto
-    =render 'sidebar'
-.d-flex.flex-column.flex-shrink-1.bg-body-tertiary.flex-fill.mb-5
-  .d-flex
-    .flex-fill.border-end.py-2
-      =link_to root_path,class:"link-dark text-decoration-none" do
-        .d-flex.justify-content-center
-          h4 おすすめ
-    .flex-fill.border-end.py-2
-      =link_to root_path,class:"link-dark text-decoration-none" do
-        .d-flex.justify-content-center
-          h4 フォロー中
-  .border-top.border-bottom.d-flex
-    =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtVzFqSJqWP4hT0YAESshj60ckCVi9C3LzSuVojFtVtWbEJoJSn_k1TSdN4lQo0dGTOdF35Ec4PUONyRDWEFSPjf_BGlBlGpiWH4N0EcBjZviofSxHQlgkmIo0Xzn-3jodrQJRRuHKm8uSU-OPblJyRoAfHDNZTR9KC_Y2MM5JhVx9S2gFa2eooTXjeDeh/s685/pet_hoso_dog.png", size: "77x77",class:"rounded-circle border m-2"
+.d-flex.border-bottom
+  .flex-fill.border-end.py-2
+    =link_to root_path,class:"link-dark text-decoration-none" do
+      .d-flex.justify-content-center
+        h4 おすすめ
+  .flex-fill.border-end.py-2
+    =link_to root_path,class:"link-dark text-decoration-none" do
+      .d-flex.justify-content-center
+        h4 フォロー中
+- if user_signed_in?
+  .border-bottom.d-flex
+    =link_to current_user do
+      =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtVzFqSJqWP4hT0YAESshj60ckCVi9C3LzSuVojFtVtWbEJoJSn_k1TSdN4lQo0dGTOdF35Ec4PUONyRDWEFSPjf_BGlBlGpiWH4N0EcBjZviofSxHQlgkmIo0Xzn-3jodrQJRRuHKm8uSU-OPblJyRoAfHDNZTR9KC_Y2MM5JhVx9S2gFa2eooTXjeDeh/s685/pet_hoso_dog.png", size: "77x77",class:"rounded-circle border m-2"
     =form_with model:Tweet.new,local:true,class:"flex-fill" do |f|
       .form-floating
         =f.text_area :content,class:"form-control form-control-lg border-0 textarea-vertical",rows:100,placeholder:""
@@ -22,18 +20,6 @@
           =f.label :image,class:"mx-2" do
             i.bi.bi-image
           =f.file_field :image, style:"display:none;"
-        =f.submit "ツイートする",class:"btn btn-primary btn-sm me-5"
-  .list-group.overflow-auto
-    ul.list-unstyled
-      - @tweets.each do |tweet|
-        li.border-bottom.d-flex
-          =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtVzFqSJqWP4hT0YAESshj60ckCVi9C3LzSuVojFtVtWbEJoJSn_k1TSdN4lQo0dGTOdF35Ec4PUONyRDWEFSPjf_BGlBlGpiWH4N0EcBjZviofSxHQlgkmIo0Xzn-3jodrQJRRuHKm8uSU-OPblJyRoAfHDNZTR9KC_Y2MM5JhVx9S2gFa2eooTXjeDeh/s685/pet_hoso_dog.png", size: "77x77",class:"rounded-circle border m-2"
-          .content.flex-fill
-            .name-area
-              =tweet.user.display_name
-            .text-break[style="word-break: normal;"]
-              =simple_format(tweet.content,class:"text-break",style:"word-break: normal;")
-      .my-3.d-flex.justify-content-center
-        = paginate @tweets,theme: 'bootstrap-5'
-
-
+        =f.submit "ツイートする",class:"btn btn-primary rounded-pill btn-sm me-5"
+.list-group.overflow-auto
+  =render 'layouts/tweets',tweets:@tweets
