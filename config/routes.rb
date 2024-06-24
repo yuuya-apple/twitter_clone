@@ -5,7 +5,8 @@ Rails.application.routes.draw do
 
   root to: 'tweets#index'
 
-  get '/logout', to: 'users#index'
+  resources :tweets
+  get '/logout', to: 'tweets#index'
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',

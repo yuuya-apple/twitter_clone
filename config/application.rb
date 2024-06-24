@@ -12,7 +12,6 @@ module Myapp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -29,5 +28,6 @@ module Myapp
       g.factory_bot false
     end
     config.action_view.default_form_builder = 'ApplicationFormBuilder'
+    config.action_view.field_error_proc = proc { |html_tag| html_tag }
   end
 end
