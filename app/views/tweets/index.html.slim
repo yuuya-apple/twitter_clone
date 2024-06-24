@@ -1,30 +1,6 @@
 .d-flex.flex-column.flex-shrink-0.border-end
   .list-group.list-group-flush.overflow-auto
-    ul.mx-3.list-unstyled
-      li.my-2
-        i.bi.bi-house.me-1
-        =link_to('ホーム',root_path,class:"link-dark text-decoration-none")
-      li.my-2
-        i.bi.bi-hash.me-1
-        =link_to '話題を検索',root_path,class:"link-dark text-decoration-none"
-      li.my-2
-        i.bi.bi-bell.me-1
-        =link_to '通知',root_path,class:"link-dark text-decoration-none"
-      li.my-2
-        i.bi.bi-envelope.me-1
-        =link_to 'メッセージ',root_path,class:"link-dark text-decoration-none"
-      li.my-2
-        i.bi.bi-bookmark.me-1
-        =link_to 'ブックマーク',root_path,class:"link-dark text-decoration-none"
-      li.my-2
-        i.bi.bi-cash-stack.me-1
-        =link_to 'Twitter Blue',root_path,class:"link-dark text-decoration-none"
-      li.my-2
-        i.bi.bi-person.me-1
-        =link_to 'プロフィール',root_path,class:"link-dark text-decoration-none"
-      li.my-2
-        i.bi.bi-three-dots.me-1
-        =link_to 'もっと見る',root_path,class:"link-dark text-decoration-none"
+    =render 'sidebar'
 .d-flex.flex-column.flex-shrink-1.bg-body-tertiary.flex-fill.mb-5
   .d-flex
     .flex-fill.border-end.py-2
