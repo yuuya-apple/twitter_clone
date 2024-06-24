@@ -47,6 +47,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_20_093509) do
     t.string "display_name", default: "", null: false
     t.string "uid"
     t.string "provider", default: "", null: false
+t.string "introduction", default: "", null: false
+    t.string "location", default: "", null: false
+    t.string "own_site", default: "", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
