@@ -1,7 +1,10 @@
 ul.list-unstyled
   - tweets.each do |tweet|
     li.border-bottom.d-flex
-      =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtVzFqSJqWP4hT0YAESshj60ckCVi9C3LzSuVojFtVtWbEJoJSn_k1TSdN4lQo0dGTOdF35Ec4PUONyRDWEFSPjf_BGlBlGpiWH4N0EcBjZviofSxHQlgkmIo0Xzn-3jodrQJRRuHKm8uSU-OPblJyRoAfHDNZTR9KC_Y2MM5JhVx9S2gFa2eooTXjeDeh/s685/pet_hoso_dog.png", size: "77x77",class:"rounded-circle border m-2"
+      - if tweet.user.icon_image.attached?
+        =image_tag tweet.user.icon_image, size: "77x77",class:"rounded-circle border m-2"
+      - else
+        =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg", size: "77x77",class:"rounded-circle border m-2"
       .flex-fill
         =link_to tweet.user.display_name,tweet.user
         =simple_format(tweet.content,class:"text-break")
