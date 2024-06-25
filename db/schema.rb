@@ -37,8 +37,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_24_191532) do
     t.string "content", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "reply_to_id"
-    t.index ["reply_to_id"], name: "index_tweets_on_reply_to_id"
     t.index ["user_id"], name: "index_tweets_on_user_id"
   end
 
@@ -81,6 +79,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_24_191532) do
   add_foreign_key "favorites", "users"
   add_foreign_key "retweets", "tweets"
   add_foreign_key "retweets", "users"
-  add_foreign_key "tweets", "tweets", column: "reply_to_id"
   add_foreign_key "tweets", "users"
 end
