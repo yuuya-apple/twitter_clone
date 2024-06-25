@@ -1,11 +1,17 @@
 .list-group.overflow-auto
-  =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUrliU21Qz3vcxrTVIUPUgohmXBN4Mw8BdIpZAPnxjU1VuiCCOYTewd3VcDSMPN_IpvNM_8_rAZSp8vNP2oA4Lf3GkMmuM4VzGfhWgu8eRkqwN-hx_wHBEv6_zYbB899aYYDit_aaM2AZs/s800/happyou_blankyokonaga_boy.png",class:" border-bottom rounded img-fluid object-fit-scale h-25"
+  - if @user.header_image.attached?
+    =image_tag @user.header_image,class:" border-bottom rounded img-fluid object-fit-scale h-25"
+  - else
+    =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhNiQiwJEndtEtiXGbge_nFBhm48O1veQDVkskf53TwtD9Tf-UsueCE7WkNoLrs3cn05HT07yCtpNkFH8UcmEP4-IA-POvT81HlnsWRnOiCrJQ_MF8lRQxmUURmwhRMJdffXm_RRPXzjZO/s1600/no_image_yoko.jpg",class:" border-bottom rounded img-fluid object-fit-scale h-25"
   .px-3.border-bottom.pb-3
     .d-flex.justify-content-between.flex-wrap
-      =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjtVzFqSJqWP4hT0YAESshj60ckCVi9C3LzSuVojFtVtWbEJoJSn_k1TSdN4lQo0dGTOdF35Ec4PUONyRDWEFSPjf_BGlBlGpiWH4N0EcBjZviofSxHQlgkmIo0Xzn-3jodrQJRRuHKm8uSU-OPblJyRoAfHDNZTR9KC_Y2MM5JhVx9S2gFa2eooTXjeDeh/s685/pet_hoso_dog.png", size: "250x250",class:"rounded-circle border mt-n1 bg-white"
+      - if @user.icon_image.attached?
+        =image_tag @user.icon_image, size: "250x250",class:"rounded-circle border mt-n1 bg-white"
+      - else
+        =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg", size: "250x250",class:"rounded-circle border mt-n1 bg-white"
       .d-flex.align-items-center
         - if current_user.id==@user.id
-          =link_to 'プロフィールを編集',user_path,class:"btn btn-secondary rounded-pill me-5"
+          =link_to 'プロフィールを編集',@user,class:"btn btn-secondary rounded-pill me-5"
         -else
           =link_to 'フォロー',"#",class:"btn btn-secondary rounded-pill me-5"
     .d-flex
@@ -29,21 +35,34 @@
       .me-2
         i.bi.bi-calendar3.me-1
         ="#{@user.created_at.strftime("%Y年%m月%d日")}からTwitterクローンを利用しています"
+  - tab=params[:tab]&.to_sym
   .d-flex.border-bottom
     .flex-fill.border-end.py-2
       =link_to @user,class:"link-dark text-decoration-none" do
         .d-flex.justify-content-center
-          h7 ツイート
+          - unless params[:tab]
+            h7.border-bottom.border-primary.border-3 ツイート
+          -else
+            h7 ツイート
     .flex-fill.border-end.py-2
-      =link_to @user,class:"link-dark text-decoration-none" do
+      =link_to "/users/#{@user.id}/#{:favorite}",class:"link-dark text-decoration-none" do
         .d-flex.justify-content-center
-          h7 いいね
+          - if tab&.equal?(:favorite)
+            h7.border-bottom.border-primary.border-3 いいね
+          -else
+            h7 いいね
     .flex-fill.border-end.py-2
-      =link_to @user,class:"link-dark text-decoration-none" do
+      =link_to "/users/#{@user.id}/#{:retweet}",class:"link-dark text-decoration-none" do
         .d-flex.justify-content-center
-          h7 リツイート
+          - if tab&.equal?(:retweet)
+            h7.border-bottom.border-primary.border-3 リツイート
+          -else
+            h7 リツイート
     .flex-fill.border-end.py-2
-      =link_to @user,class:"link-dark text-decoration-none" do
+      =link_to "/users/#{@user.id}/#{:reply}",class:"link-dark text-decoration-none" do
         .d-flex.justify-content-center
-          h7 コメント
-  =render 'layouts/tweets',tweets:@user.tweets.page(params[:page]).order(created_at: :desc)
+          - if tab&.equal?(:reply)
+            h7.border-bottom.border-primary.border-3 コメント
+          -else
+            h7 コメント
+  =render 'layouts/tweets',tweets:@tweets
