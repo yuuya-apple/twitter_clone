@@ -28,6 +28,8 @@ user1 = User.create!(
   date_of_birth: '2024-06-23',
   display_name: 'ほげ太郎',
   password: 'password',
+  password_confirmation: 'password',
+  confirmed_at: Time.current,
   introduction: '自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。',
   location: '東京都葛飾区亀有',
   own_site: 'https://qiita.com/yuuya-apple'
@@ -44,6 +46,8 @@ user2 = User.create!(
   date_of_birth: '2024-06-23',
   display_name: 'ほげ次郎',
   password: 'password',
+  password_confirmation: 'password',
+  confirmed_at: Time.current,
   introduction: '自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。',
   own_site: 'https://qiita.com/yuuya-apple'
 )
@@ -57,6 +61,8 @@ user3 = User.create!(
   date_of_birth: '2024-06-23',
   display_name: 'ほげ三郎',
   password: 'password',
+  password_confirmation: 'password',
+  confirmed_at: Time.current,
   introduction: '自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。自己紹介です。'
 )
 user3.icon_image.attach(io: File.open(Rails.root.join('app/assets/images/icon_business_man07.png')),
