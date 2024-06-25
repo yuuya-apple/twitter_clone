@@ -65,7 +65,7 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "myapp_production"
 
-  config.action_mailer.default_url_options = { host: 'gentle-sands-35485-a5aeb07af2e2.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'peaceful-basin-96418-4c3189d62561.herokuapp.com' }
 
   config.action_mailer.delivery_method = :letter_opener_web
 
