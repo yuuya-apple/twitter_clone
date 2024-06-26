@@ -1,0 +1,40 @@
+.list-group.overflow-auto
+  =form_with model:@user,local:true do |f|
+    .h-25.card.border-0.border-bottom.rounded-0
+      - if @user.header_image.attached?
+        =image_tag @user.header_image,class:"h-100 w-100"
+      - else
+        =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhNiQiwJEndtEtiXGbge_nFBhm48O1veQDVkskf53TwtD9Tf-UsueCE7WkNoLrs3cn05HT07yCtpNkFH8UcmEP4-IA-POvT81HlnsWRnOiCrJQ_MF8lRQxmUURmwhRMJdffXm_RRPXzjZO/s1600/no_image_yoko.jpg",class:"h-100 w-100"
+      .card-img-overlay.d-flex
+        .m-auto
+          =f.label :header_image,class:"btn rounded-circle bg-dark bg-opacity-25"
+            i.bi.bi-camera.fs-3.text-light
+            =f.file_field :header_image,class: "d-none"
+    .px-3.pb-3
+      .border-0.border-bottom.rounded-0.card.profile-icon.rounded-circle.mt-n1.mb-3
+        - if @user.icon_image.attached?
+          =image_tag @user.icon_image,class:"rounded-circle border bg-white w-100 h-100"
+        - else
+          =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg",class:"rounded-circle border bg-white w-100 h-100"
+        .card-img-overlay.d-flex
+          .m-auto
+            =f.label :icon_image,class:"btn rounded-circle bg-dark bg-opacity-25"
+              i.bi.bi-camera.fs-3.text-light
+              =f.file_field :icon_image,class: "d-none"
+      .form-floating.mb-3
+        = f.text_field :display_name, autocomplete: "display_name",class:"form-control",placeholder:""
+        = f.label "名前"
+      .form-floating.mb-3
+        = f.text_area :introduction,class:"form-control textarea-vertical h-25",placeholder:""
+        = f.label "自己紹介"
+      .form-floating.mb-3
+        = f.text_field :location,class:"form-control",placeholder:""
+        = f.label :"場所"
+      .form-floating.mb-3
+        = f.text_field :own_site,class:"form-control",placeholder:""
+        = f.label "サイト"
+      .form-floating.mb-3
+        = f.date_field :date_of_birth, class: 'form-control'
+        = f.label :生年月日
+      .actions
+        = f.submit "保存",class:"form-control btn btn-dark"

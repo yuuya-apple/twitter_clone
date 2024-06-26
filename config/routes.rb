@@ -15,9 +15,7 @@ Rails.application.routes.draw do
     confirmations: 'users/confirmations'
   }
 
-  resources :users, only: [:show] do
-    get ':tab', to: 'users#show'
-  end
+  resources :users
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
