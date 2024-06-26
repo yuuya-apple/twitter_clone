@@ -1,0 +1,19 @@
+ul.list-unstyled
+  - tweets.each do |tweet|
+    li.border-bottom.d-flex
+      - if tweet.user.icon_image.attached?
+        =image_tag tweet.user.icon_image, size: "77x77",class:"rounded-circle border m-2"
+      - else
+        =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg", size: "77x77",class:"rounded-circle border m-2"
+      .flex-fill
+        =link_to tweet.user.display_name,tweet.user
+        =simple_format(tweet.content,class:"text-break")
+        .d-flex
+          =link_to root_path,class:"me-5" do
+            i.bi.bi-chat
+          =link_to root_path,class:"me-5" do
+            i.bi.bi-repeat
+          =link_to root_path,class:"me-5" do
+            i.bi.bi-heart
+  .my-3.d-flex.justify-content-center
+    = paginate tweets,theme: 'bootstrap-5'

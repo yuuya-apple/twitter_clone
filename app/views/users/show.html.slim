@@ -1,0 +1,45 @@
+.list-group.overflow-auto
+  - if @user.header_image.attached?
+    =image_tag @user.header_image,class:" border-bottom rounded img-fluid object-fit-scale h-25"
+  - else
+    =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhNiQiwJEndtEtiXGbge_nFBhm48O1veQDVkskf53TwtD9Tf-UsueCE7WkNoLrs3cn05HT07yCtpNkFH8UcmEP4-IA-POvT81HlnsWRnOiCrJQ_MF8lRQxmUURmwhRMJdffXm_RRPXzjZO/s1600/no_image_yoko.jpg",class:" border-bottom rounded img-fluid object-fit-scale h-25"
+  .px-3.border-bottom.pb-3
+    .d-flex.justify-content-between.flex-wrap
+      - if @user.icon_image.attached?
+        =image_tag @user.icon_image, size: "250x250",class:"rounded-circle border mt-n1 bg-white"
+      - else
+        =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg", size: "250x250",class:"rounded-circle border mt-n1 bg-white"
+      .d-flex.align-items-center
+        - if current_user.id==@user.id
+          =link_to 'プロフィールを編集',@user,class:"btn btn-secondary rounded-pill me-5"
+        -else
+          =link_to 'フォロー',"#",class:"btn btn-secondary rounded-pill me-5"
+    .d-flex
+      h1
+        =@user.display_name
+    .pb-1
+      =@user.introduction
+    .d-flex.text-secondary.opacity-50.flex-wrap
+      - if @user.location.present?
+        .me-2
+          i.bi.bi-geo-alt.me-1
+          =@user.location
+      - if @user.own_site.present?
+        .me-2
+          i.bi.bi-link-45deg.me-1
+          =link_to @user.own_site,@user.own_site
+      - if @user.date_of_birth.present?
+        .me-2
+          i.bi.bi-balloon.me-1
+          ="誕生日:#{@user.date_of_birth}"
+      .me-2
+        i.bi.bi-calendar3.me-1
+        ="#{@user.created_at.strftime("%Y年%m月%d日")}からTwitterクローンを利用しています"
+  .d-flex.border-bottom
+    - tab=params[:tab]&.to_sym
+    =render 'tab',tab:tab,tab_type: nil,tab_name:"ツイート"
+    =render 'tab',tab:tab,tab_type: :favorite,tab_name:"いいね"
+    =render 'tab',tab:tab,tab_type: :retweet,tab_name:"リツイート"
+    =render 'tab',tab:tab,tab_type: :reply,tab_name:"コメント"
+
+  =render 'layouts/tweets',tweets:@tweets

@@ -19,6 +19,8 @@ html
             - else
               =link_to "ログイン",new_user_session_path,class:"btn btn-outline-primary"
               =link_to "新規登録",new_user_registration_path,class:"btn btn-primary ms-2"
-    main.flex-shrink-0.d-flex.flex-nowrap
-      = yield
+    main.flex-shrink-0.d-flex.flex-nowrap.h-100
+      =render 'layouts/sidebar'
+      .d-flex.flex-column.flex-shrink-1.bg-body-tertiary.flex-fill.mb-5
+        = yield
 

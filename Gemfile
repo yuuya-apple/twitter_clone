@@ -47,6 +47,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'bootstrap5-kaminari-views'
 gem 'devise', '~> 4.9'
 gem 'dotenv-rails'
+gem 'image_processing', '>= 1.2'
 gem 'kaminari'
 gem 'letter_opener_web', '~> 3.0'
 gem 'omniauth'

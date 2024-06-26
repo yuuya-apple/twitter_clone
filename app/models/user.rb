@@ -10,7 +10,13 @@ class User < ApplicationRecord
   validates :date_of_birth, presence: true
   validates :uid, uniqueness: { scope: :provider }, if: -> { uid.present? }
 
+  has_one_attached :icon_image
+  has_one_attached :header_image
+
   has_many :tweets, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :replys, dependent: :destroy
+  has_many :retweets, dependent: :destroy
 
   def self.create_unique_string
     SecureRandom.uuid
