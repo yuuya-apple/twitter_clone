@@ -1,0 +1,9 @@
+.flex-fill.border-end.py-2
+  =link_to "/users/#{@user.id}/#{tab_type}",class:"link-dark text-decoration-none" do
+    .d-flex.justify-content-center
+      - if tab.nil? && tab_type.nil? || tab&.equal?(tab_type)
+        h7.border-bottom.border-primary.border-3
+          =tab_name
+      -else
+        h7
+          =tab_name

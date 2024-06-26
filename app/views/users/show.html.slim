@@ -35,34 +35,11 @@
       .me-2
         i.bi.bi-calendar3.me-1
         ="#{@user.created_at.strftime("%Y年%m月%d日")}からTwitterクローンを利用しています"
-  - tab=params[:tab]&.to_sym
   .d-flex.border-bottom
-    .flex-fill.border-end.py-2
-      =link_to @user,class:"link-dark text-decoration-none" do
-        .d-flex.justify-content-center
-          - unless params[:tab]
-            h7.border-bottom.border-primary.border-3 ツイート
-          -else
-            h7 ツイート
-    .flex-fill.border-end.py-2
-      =link_to "/users/#{@user.id}/#{:favorite}",class:"link-dark text-decoration-none" do
-        .d-flex.justify-content-center
-          - if tab&.equal?(:favorite)
-            h7.border-bottom.border-primary.border-3 いいね
-          -else
-            h7 いいね
-    .flex-fill.border-end.py-2
-      =link_to "/users/#{@user.id}/#{:retweet}",class:"link-dark text-decoration-none" do
-        .d-flex.justify-content-center
-          - if tab&.equal?(:retweet)
-            h7.border-bottom.border-primary.border-3 リツイート
-          -else
-            h7 リツイート
-    .flex-fill.border-end.py-2
-      =link_to "/users/#{@user.id}/#{:reply}",class:"link-dark text-decoration-none" do
-        .d-flex.justify-content-center
-          - if tab&.equal?(:reply)
-            h7.border-bottom.border-primary.border-3 コメント
-          -else
-            h7 コメント
+    - tab=params[:tab]&.to_sym
+    =render 'tab',tab:tab,tab_type: nil,tab_name:"ツイート"
+    =render 'tab',tab:tab,tab_type: :favorite,tab_name:"いいね"
+    =render 'tab',tab:tab,tab_type: :retweet,tab_name:"リツイート"
+    =render 'tab',tab:tab,tab_type: :reply,tab_name:"コメント"
+
   =render 'layouts/tweets',tweets:@tweets
