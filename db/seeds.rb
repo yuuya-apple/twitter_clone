@@ -80,7 +80,7 @@ user2.tweets.limit(15).each do |t|
     user_id: user1.id,
     tweet_id: t.id
   )
-  Reply.create!(
+  Comment.create!(
     user_id: user1.id,
     tweet_id: t.id
   )
@@ -95,7 +95,7 @@ user3.tweets.limit(15).each do |t|
     user_id: user1.id,
     tweet_id: t.id
   )
-  Reply.create!(
+  Comment.create!(
     user_id: user1.id,
     tweet_id: t.id
   )
