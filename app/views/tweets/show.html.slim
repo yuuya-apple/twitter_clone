@@ -11,7 +11,7 @@
           .d-flex
             =@tweet.user.display_name
         .flex-fill
-      .mt-3
+      .mt-3.text-break
         =@tweet.content
       .mt-3.mb-3
         - if @tweet.image.attached?
@@ -54,5 +54,5 @@
         .flex-fill
           .mb-1.d-flex
             =link_to comment.user.display_name,comment.user,class:"link-dark text-decoration-none"
-          .mb-1.d-flex
+          .mb-1.d-flex.text-break
             =comment.content
