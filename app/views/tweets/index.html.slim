@@ -16,13 +16,14 @@
         =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg", size: "77x77",class:"rounded-circle border m-2"
     =form_with model:Tweet.new,local:true,class:"flex-fill" do |f|
       .form-floating
-        =f.text_area :content,class:"form-control form-control-lg border-0 textarea-vertical",rows:100,placeholder:""
+        =f.text_area :content,class:"form-control form-control-lg border-0 textarea-vertical",rows:100,placeholder:"",maxlength:140, autocomplete: "content",required:true
         = f.label "最近の出来事を呟こう",class:"text-black-50"
       .form-group.d-flex.justify-content-between
-        .d-flex.align-items-center
+        .d-flex.align-items-center.fs-3
           =f.label :image,class:"mx-2" do
             i.bi.bi-image
           =f.file_field :image, style:"display:none;"
-        =f.submit "ツイートする",class:"btn btn-primary rounded-pill btn-sm me-5"
+        .me-5.d-flex.align-items-center
+          =f.submit "ツイートする",class:"btn btn-primary rounded-pill btn-sm"
 .list-group.overflow-auto
   =render 'layouts/tweets',tweets:@tweets

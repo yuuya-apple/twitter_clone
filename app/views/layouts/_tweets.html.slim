@@ -1,19 +1,43 @@
 ul.list-unstyled
   - tweets.each do |tweet|
     li.border-bottom.d-flex
-      - if tweet.user.icon_image.attached?
-        =image_tag tweet.user.icon_image, size: "77x77",class:"rounded-circle border m-2"
-      - else
-        =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg", size: "77x77",class:"rounded-circle border m-2"
+      .d-flex.flex-column
+        - if tweet.user.icon_image.attached?
+          =link_to tweet.user do
+            =image_tag tweet.user.icon_image, size: "77x77",class:"rounded-circle border m-2"
+        - else
+          =link_to tweet.user do
+            =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg", size: "77x77",class:"rounded-circle border m-2"
+        =link_to tweet,class:"h-100 w-100" do
       .flex-fill
-        =link_to tweet.user.display_name,tweet.user
-        =simple_format(tweet.content,class:"text-break")
+        .mb-1.d-flex
+          =link_to tweet.user.display_name,tweet.user,class:"link-dark text-decoration-none"
+          =link_to tweet,class:"flex-fill" do
+        .mb-1.d-flex
+          =link_to tweet,class:"flex-fill link-dark text-decoration-none" do
+            =tweet.content
+        .mb-1.d-flex
+          =link_to tweet,class:"flex-fill" do
+            - if tweet.image.attached?
+              =image_tag tweet.image,size:"100x100"
         .d-flex
-          =link_to root_path,class:"me-5" do
-            i.bi.bi-chat
-          =link_to root_path,class:"me-5" do
-            i.bi.bi-repeat
-          =link_to root_path,class:"me-5" do
-            i.bi.bi-heart
+          .d-flex
+            =link_to root_path,class:"me-5" do
+              i.bi.bi-chat.me-2
+            =link_to root_path,class:"text-decoration-none me-5" do
+              - if tweet.retweets.any?{|f|f.user_id==current_user.id}
+                i.bi.bi-repeat.text-danger.me-2
+              - else
+                i.bi.bi-repeat.me-2
+              - if tweet.retweets.present?
+                = tweet.retweets.size
+            =link_to favorites_path(params: { tweet_id:tweet.id }),class:"text-decoration-none me-5",data: {turbo_method: :post} do
+              - if tweet.favorites.any?{|f|f.user_id==current_user.id}
+                i.bi.bi-heart-fill.me-2.text-danger
+              - else
+                i.bi.bi-heart.me-2
+              - if tweet.favorites.present?
+                = tweet.favorites.size
+          =link_to tweet,class:"flex-fill" do
   .my-3.d-flex.justify-content-center
     = paginate tweets,theme: 'bootstrap-5'
