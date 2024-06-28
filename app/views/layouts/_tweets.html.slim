@@ -24,15 +24,15 @@ ul.list-unstyled
           .d-flex
             =link_to root_path,class:"me-5" do
               i.bi.bi-chat.me-2
-            =link_to root_path,class:"text-decoration-none me-5" do
-              - if tweet.retweets.any?{|f|f.user_id==current_user.id}
+            =link_to retweets_path(params: { tweet_id:tweet.id }),data: {turbo_method: :post},class:"text-decoration-none me-5" do
+              - if tweet.retweets.any?{|f|f.user_id==current_user&.id}
                 i.bi.bi-repeat.text-danger.me-2
               - else
                 i.bi.bi-repeat.me-2
               - if tweet.retweets.present?
                 = tweet.retweets.size
             =link_to favorites_path(params: { tweet_id:tweet.id }),class:"text-decoration-none me-5",data: {turbo_method: :post} do
-              - if tweet.favorites.any?{|f|f.user_id==current_user.id}
+              - if tweet.favorites.any?{|f|f.user_id==current_user&.id}
                 i.bi.bi-heart-fill.me-2.text-danger
               - else
                 i.bi.bi-heart.me-2

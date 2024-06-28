@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   root to: 'tweets#index'
 
   resources :tweets
+  resources :favorites, only: %i[create]
+  resources :retweets, only: %i[create]
+
   get '/logout', to: 'tweets#index'
 
   devise_for :users, controllers: {
