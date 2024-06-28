@@ -1,17 +1,19 @@
 .list-group.overflow-auto
-  - if @user.header_image.attached?
-    =image_tag @user.header_image,class:" border-bottom rounded img-fluid object-fit-scale h-25"
-  - else
-    =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhNiQiwJEndtEtiXGbge_nFBhm48O1veQDVkskf53TwtD9Tf-UsueCE7WkNoLrs3cn05HT07yCtpNkFH8UcmEP4-IA-POvT81HlnsWRnOiCrJQ_MF8lRQxmUURmwhRMJdffXm_RRPXzjZO/s1600/no_image_yoko.jpg",class:" border-bottom rounded img-fluid object-fit-scale h-25"
+  .h-25.border-bottom
+    - if @user.header_image.attached?
+      =image_tag @user.header_image,class:"h-100 w-100"
+    - else
+      =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhhNiQiwJEndtEtiXGbge_nFBhm48O1veQDVkskf53TwtD9Tf-UsueCE7WkNoLrs3cn05HT07yCtpNkFH8UcmEP4-IA-POvT81HlnsWRnOiCrJQ_MF8lRQxmUURmwhRMJdffXm_RRPXzjZO/s1600/no_image_yoko.jpg",class:"h-100 w-100"
   .px-3.border-bottom.pb-3
     .d-flex.justify-content-between.flex-wrap
-      - if @user.icon_image.attached?
-        =image_tag @user.icon_image, size: "250x250",class:"rounded-circle border mt-n1 bg-white"
-      - else
-        =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg", size: "250x250",class:"rounded-circle border mt-n1 bg-white"
+      .profile-icon.rounded-circle.mt-n1
+        - if @user.icon_image.attached?
+          =image_tag @user.icon_image,class:"rounded-circle border bg-white w-100 h-100"
+        - else
+          =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg",class:"rounded-circle border bg-white w-100 h-100"
       .d-flex.align-items-center
         - if current_user.id==@user.id
-          =link_to 'プロフィールを編集',@user,class:"btn btn-secondary rounded-pill me-5"
+          =link_to 'プロフィールを編集',edit_user_path(@user),class:"btn btn-secondary rounded-pill me-5"
         -else
           =link_to 'フォロー',"#",class:"btn btn-secondary rounded-pill me-5"
     .d-flex
