@@ -15,7 +15,7 @@ class User < ApplicationRecord
 
   has_many :tweets, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :replys, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :retweets, dependent: :destroy
 
   def self.create_unique_string

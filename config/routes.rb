@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   root to: 'tweets#index'
 
   resources :tweets
+  resources :favorites, only: %i[create]
+  resources :retweets, only: %i[create]
+
   get '/logout', to: 'tweets#index'
+  post '/tweets/:tweet_id/comments', to: 'comments#create'
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',

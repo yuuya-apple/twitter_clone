@@ -1,0 +1,58 @@
+.list-group.overflow-auto
+  .border-bottom.px-3
+    .border-bottom
+      .mt-3.d-flex
+        =link_to @tweet.user,class:"d-flex link-dark text-decoration-none" do
+          .me-2
+            - if @tweet.user.icon_image.attached?
+              =image_tag @tweet.user.icon_image, size: "77x77",class:"border"
+            - else
+              =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg", size: "77x77",class:"border"
+          .d-flex
+            =@tweet.user.display_name
+        .flex-fill
+      .mt-3.text-break
+        =@tweet.content
+      .mt-3.mb-3
+        - if @tweet.image.attached?
+          =image_tag @tweet.image
+    .border-bottom.d-flex.mb-3.py-3
+      .flex-fill.d-flex.justify-content-center
+        i.bi.bi-chat
+      =link_to retweets_path(params: { tweet_id:@tweet.id }),data: {turbo_method: :post},class:"text-decoration-none flex-fill d-flex justify-content-center" do
+        - if @tweet.retweet_by?(current_user.id)
+          i.bi.bi-repeat.text-danger.me-2
+        - else
+          i.bi.bi-repeat.me-2
+        - if @tweet.retweets.present?
+          = @tweet.retweets.size
+      =link_to favorites_path(params: { tweet_id:@tweet.id }),data: {turbo_method: :post},class:"text-decoration-none flex-fill d-flex justify-content-center" do
+        - if @tweet.favorite_by?(current_user.id)
+          i.bi.bi-heart-fill.me-2.text-danger
+        - else
+          i.bi.bi-heart.me-2
+        - if @tweet.favorites.present?
+          = @tweet.favorites.size
+    =form_with url:"#{@tweet.id}/comments",local:true,class:"flex-fill mb-3" do |f|
+      =f.fields_for :comments do |c|
+        .d-flex
+          .form-floating.flex-fill
+            =c.text_area :content,class:"form-control form-control-lg border-0 textarea-vertical",rows:100,placeholder:"",maxlength:140, autocomplete: "content",required:true
+            =c.label "コメント",class:"text-black-50"
+          .ms-2.d-flex.align-items-center
+            =c.submit "ツイートする",class:"btn btn-primary rounded-pill btn-sm"
+  ul.list-unstyled
+    - @tweet.comments.each do |comment|
+      li.border-bottom.d-flex
+        .d-flex.flex-column
+          - if comment.user.icon_image.attached?
+            =link_to comment.user do
+              =image_tag comment.user.icon_image, size: "77x77",class:"rounded-circle border m-2"
+          - else
+            =link_to comment.user do
+              =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg", size: "77x77",class:"rounded-circle border m-2"
+        .flex-fill
+          .mb-1.d-flex
+            =link_to comment.user.display_name,comment.user,class:"link-dark text-decoration-none"
+          .mb-1.d-flex.text-break
+            =comment.content
