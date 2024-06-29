@@ -2,11 +2,11 @@
 
 class FavoritesController < ApplicationController
   def create
-    favorite = Favorite.find_by(user_id: current_user.id, tweet_id: params[:tweet_id])
-    if favorite.present?
-      favorite.destroy
+    favorite = current_user.favorites.find_or_initialize_by(tweet_id: params[:tweet_id])
+    if favorite.new_record?
+      favorite.save
     else
-      Favorite.new(user_id: current_user.id, tweet_id: params[:tweet_id]).save
+      favorite.destroy
     end
     redirect_to request.referer
   end

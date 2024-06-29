@@ -10,35 +10,30 @@ class TweetsController < ApplicationController
   end
 
   def create
-    current_user.tweets.new(tweet_params).save
+    current_user.tweets.create(tweet_params)
     redirect_to request.referer
   end
 
   def update
     @tweet = Tweet.find(params[:id])
 
-    request_params = tweet_params
-
-    if request_params[:comments]
-      comment = @tweet.comments.new(request_params[:comments])
-      comment.user_id = current_user.id
-      comment.save
-    else
-      @tweet.update(request_params)
-    end
+    @tweet.update(tweet_params)
 
     redirect_to request.referer
   end
 
   def show
-    @tweet = Tweet.includes(image_attachment: :blob).eager_load(:user).includes(user: { icon_image_attachment: :blob })
-                  .eager_load(:favorites).eager_load(:retweets)
+    @tweet = Tweet.includes(image_attachment: :blob)
+                  .includes(comments: { user: { icon_image_attachment: :blob } })
+                  .eager_load(user: { icon_image_attachment: :blob })
+                  .eager_load(:favorites)
+                  .eager_load(:retweets)
                   .find(params[:id])
   end
 
   private
 
   def tweet_params
-    params.require(:tweet).permit(Tweet.column_names.map(&:to_sym), :image, comments: [:content])
+    params.require(:tweet).permit(Tweet.column_names.map(&:to_sym), :image)
   end
 end

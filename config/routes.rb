@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :retweets, only: %i[create]
 
   get '/logout', to: 'tweets#index'
+  post '/tweets/:tweet_id/comments', to: 'comments#create'
 
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks',

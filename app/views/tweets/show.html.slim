@@ -20,20 +20,20 @@
       .flex-fill.d-flex.justify-content-center
         i.bi.bi-chat
       =link_to retweets_path(params: { tweet_id:@tweet.id }),data: {turbo_method: :post},class:"text-decoration-none flex-fill d-flex justify-content-center" do
-        - if @tweet.retweets.any?{|f|f.user_id==current_user.id}
+        - if @tweet.retweet_by?(current_user.id)
           i.bi.bi-repeat.text-danger.me-2
         - else
           i.bi.bi-repeat.me-2
         - if @tweet.retweets.present?
           = @tweet.retweets.size
       =link_to favorites_path(params: { tweet_id:@tweet.id }),data: {turbo_method: :post},class:"text-decoration-none flex-fill d-flex justify-content-center" do
-        - if @tweet.favorites.any?{|f|f.user_id==current_user.id}
+        - if @tweet.favorite_by?(current_user.id)
           i.bi.bi-heart-fill.me-2.text-danger
         - else
           i.bi.bi-heart.me-2
         - if @tweet.favorites.present?
           = @tweet.favorites.size
-    =form_with model: @tweet,local:true,class:"flex-fill mb-3" do |f|
+    =form_with url:"#{@tweet.id}/comments",local:true,class:"flex-fill mb-3" do |f|
       =f.fields_for :comments do |c|
         .d-flex
           .form-floating.flex-fill
@@ -42,7 +42,7 @@
           .ms-2.d-flex.align-items-center
             =c.submit "ツイートする",class:"btn btn-primary rounded-pill btn-sm"
   ul.list-unstyled
-    - @tweet.comments.eager_load(:user).includes(user: { icon_image_attachment: :blob }).each do |comment|
+    - @tweet.comments.each do |comment|
       li.border-bottom.d-flex
         .d-flex.flex-column
           - if comment.user.icon_image.attached?

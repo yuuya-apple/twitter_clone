@@ -24,4 +24,12 @@ class Tweet < ApplicationRecord
     resources.includes(image_attachment: :blob).eager_load(:user).includes(user: { icon_image_attachment: :blob })
              .eager_load(:favorites).eager_load(:retweets)
   end
+
+  def retweet_by?(user_id)
+    retweets.any? { |f| f.user_id == user_id }
+  end
+
+  def favorite_by?(user_id)
+    favorites.any? { |f| f.user_id == user_id }
+  end
 end
