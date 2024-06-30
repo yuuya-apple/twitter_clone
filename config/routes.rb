@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :favorites, only: %i[create]
   resources :retweets, only: %i[create]
   resources :follows, only: %i[create]
+  resources :book_marks, only: %i[create index]
 
   get '/logout', to: 'tweets#index'
   post '/tweets/:tweet_id/comments', to: 'comments#create'
