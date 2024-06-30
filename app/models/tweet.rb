@@ -5,6 +5,7 @@ class Tweet < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :retweets, dependent: :destroy
+  has_many :book_marks, dependent: :destroy
 
   has_one_attached :image
 
@@ -31,5 +32,9 @@ class Tweet < ApplicationRecord
 
   def favorite_by?(user_id)
     favorites.any? { |f| f.user_id == user_id }
+  end
+
+  def book_mark_by?(user_id)
+    book_marks.any? { |f| f.user_id == user_id }
   end
 end

@@ -19,6 +19,7 @@ class User < ApplicationRecord
   has_many :retweets, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :retweets, dependent: :destroy
+  has_many :book_marks, dependent: :destroy
 
   has_many :follows, class_name: 'Follow', foreign_key: 'follow_by', dependent: :destroy, inverse_of: :follow_to
   has_many :followers, class_name: 'Follow', foreign_key: 'follow_to', dependent: :destroy, inverse_of: :follow_by
