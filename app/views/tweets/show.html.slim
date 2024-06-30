@@ -40,6 +40,11 @@
           i.bi.bi-heart.me-2
         - if @tweet.favorites.present?
           = @tweet.favorites.size
+      =link_to book_marks_path(params: { tweet_id:@tweet.id }),data: {turbo_method: :post},class:"text-decoration-none flex-fill d-flex justify-content-center" do
+        - if @tweet.book_mark_by?(current_user&.id)
+          i.bi.bi-bookmark-fill.me-2.text-danger
+        - else
+          i.bi.bi-bookmark.me-2
     =form_with url:"#{@tweet.id}/comments",local:true,class:"flex-fill mb-3" do |f|
       =f.fields_for :comments do |c|
         .d-flex
