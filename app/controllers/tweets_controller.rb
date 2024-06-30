@@ -6,7 +6,7 @@ class TweetsController < ApplicationController
   def index
     @tweets = Tweet.all.page(params[:page]).order(created_at: :desc).includes(image_attachment: :blob)
                    .eager_load(:user).includes(user: { icon_image_attachment: :blob })
-                   .eager_load(:favorites).eager_load(:retweets)
+                   .eager_load(:favorites).eager_load(:retweets).eager_load(:book_marks)
   end
 
   def create
@@ -28,6 +28,7 @@ class TweetsController < ApplicationController
                   .eager_load(user: { icon_image_attachment: :blob })
                   .eager_load(:favorites)
                   .eager_load(:retweets)
+                  .eager_load(:book_marks)
                   .find(params[:id])
   end
 
