@@ -10,7 +10,14 @@
               =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg", size: "77x77",class:"border"
           .d-flex
             =@tweet.user.display_name
-        .flex-fill
+        .flex-fill.d-flex.flex-row-reverse
+          .dropdown
+            =link_to "",id:"navbarDropdown",role:"button",'data-bs-toggle': :dropdown do
+              i.bi.bi-three-dots.fs-3
+            ul.dropdown-menu
+              li
+                =link_to follows_path(params: { follow_to:@tweet.user.id }),data: {turbo_method: :post},class:"link-dark text-decoration-none d-flex justify-content-center" do
+                  = @tweet.user.followed_by?(current_user&.id) ? "フォロー解除" :"フォロー"
       .mt-3.text-break
         =@tweet.content
       .mt-3.mb-3
@@ -20,14 +27,14 @@
       .flex-fill.d-flex.justify-content-center
         i.bi.bi-chat
       =link_to retweets_path(params: { tweet_id:@tweet.id }),data: {turbo_method: :post},class:"text-decoration-none flex-fill d-flex justify-content-center" do
-        - if @tweet.retweet_by?(current_user.id)
+        - if @tweet.retweet_by?(current_user&.id)
           i.bi.bi-repeat.text-danger.me-2
         - else
           i.bi.bi-repeat.me-2
         - if @tweet.retweets.present?
           = @tweet.retweets.size
       =link_to favorites_path(params: { tweet_id:@tweet.id }),data: {turbo_method: :post},class:"text-decoration-none flex-fill d-flex justify-content-center" do
-        - if @tweet.favorite_by?(current_user.id)
+        - if @tweet.favorite_by?(current_user&.id)
           i.bi.bi-heart-fill.me-2.text-danger
         - else
           i.bi.bi-heart.me-2

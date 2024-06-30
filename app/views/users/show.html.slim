@@ -15,7 +15,8 @@
         - if current_user.id==@user.id
           =link_to 'プロフィールを編集',edit_user_path(@user),class:"btn btn-secondary rounded-pill me-5"
         -else
-          =link_to 'フォロー',"#",class:"btn btn-secondary rounded-pill me-5"
+          =link_to follows_path(params: { follow_to:@user.id }),data: {turbo_method: :post},class:"btn btn-secondary rounded-pill me-5" do
+            = @user.followed_by?(current_user.id) ? "フォロー解除" :"フォロー"
     .d-flex
       h1
         =@user.display_name

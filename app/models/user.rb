@@ -17,6 +17,15 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :retweets, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :retweets, dependent: :destroy
+
+  has_many :follows, class_name: 'Follow', foreign_key: 'follow_by', dependent: :destroy, inverse_of: :follow_to
+  has_many :followers, class_name: 'Follow', foreign_key: 'follow_to', dependent: :destroy, inverse_of: :follow_by
+
+  def followed_by?(user_id)
+    followers.any? { |f| f.follow_by_id == user_id }
+  end
 
   def self.create_unique_string
     SecureRandom.uuid
