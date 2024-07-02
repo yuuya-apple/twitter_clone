@@ -1,6 +1,6 @@
 .d-flex.flex-column.flex-shrink-0.border-end.col-lg-2
   .list-group.list-group-flush.overflow-auto
-    ul.mx-3.list-unstyled.
+    ul.mx-3.list-unstyled
       li.my-2
         i.bi.bi-house.me-1
         =link_to('ホーム',root_path,class:"link-dark text-decoration-none")
@@ -12,7 +12,7 @@
         =link_to '通知',root_path,class:"link-dark text-decoration-none"
       li.my-2
         i.bi.bi-envelope.me-1
-        =link_to 'メッセージ',root_path,class:"link-dark text-decoration-none"
+        =link_to 'メッセージ',messages_path,class:"link-dark text-decoration-none"
       li.my-2
         i.bi.bi-bookmark.me-1
         =link_to 'ブックマーク',book_marks_path,class:"link-dark text-decoration-none"
