@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_30_142713) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_02_164829) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -89,6 +89,18 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_142713) do
     t.index ["send_to_id"], name: "index_messages_on_send_to_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "notifi_to_id"
+    t.bigint "notifi_by_id"
+    t.string "notificationable_type"
+    t.bigint "notificationable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["notifi_by_id"], name: "index_notifications_on_notifi_by_id"
+    t.index ["notifi_to_id"], name: "index_notifications_on_notifi_to_id"
+    t.index ["notificationable_type", "notificationable_id"], name: "index_notifications_on_notificationable"
+  end
+
   create_table "retweets", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "tweet_id"
@@ -153,6 +165,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_142713) do
   add_foreign_key "follows", "users", column: "follow_to_id"
   add_foreign_key "messages", "users", column: "send_by_id"
   add_foreign_key "messages", "users", column: "send_to_id"
+  add_foreign_key "notifications", "users", column: "notifi_by_id"
+  add_foreign_key "notifications", "users", column: "notifi_to_id"
   add_foreign_key "retweets", "tweets"
   add_foreign_key "retweets", "users"
   add_foreign_key "tweets", "users"

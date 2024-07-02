@@ -26,6 +26,8 @@ class User < ApplicationRecord
   has_many :send_messages, class_name: 'Message', foreign_key: 'send_by', dependent: :destroy, inverse_of: :send_to
   has_many :receive_messages, class_name: 'Message', foreign_key: 'send_to', dependent: :destroy,
                               inverse_of: :send_by
+  has_many :notifications, class_name: 'Notification', foreign_key: 'notifi_to', dependent: :destroy,
+                           inverse_of: :notifi_by
 
   def followed_by?(user_id)
     followers.any? { |f| f.follow_by_id == user_id }
