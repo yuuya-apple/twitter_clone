@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  after_action -> { create_notification(@comment) }, only: %i[create]
+
   def create
     tweet = Tweet.find(params[:tweet_id])
 
     return  redirect_to request.referer if tweet.nil?
 
-    comment = tweet.comments.new(comment_params)
-    comment.user_id = current_user.id
-    comment.save
+    @comment = tweet.comments.new(comment_params)
+    @comment.user_id = current_user.id
+    @comment.save
 
     redirect_to request.referer
   end
