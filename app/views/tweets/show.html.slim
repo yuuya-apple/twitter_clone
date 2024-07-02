@@ -18,6 +18,9 @@
               li
                 =link_to follows_path(params: { follow_to:@tweet.user.id }),data: {turbo_method: :post},class:"link-dark text-decoration-none d-flex justify-content-center" do
                   = @tweet.user.followed_by?(current_user&.id) ? "フォロー解除" :"フォロー"
+              li
+                =link_to messages_path,class:"link-dark text-decoration-none d-flex justify-content-center" do
+                  = "メッセージ"
       .mt-3.text-break
         =@tweet.content
       .mt-3.mb-3
