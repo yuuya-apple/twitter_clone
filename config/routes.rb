@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :favorites, only: %i[create]
   resources :retweets, only: %i[create]
   resources :follows, only: %i[create]
+  resources :messages, only: %i[index]
   resources :book_marks, only: %i[create index]
 
   get '/logout', to: 'tweets#index'
@@ -21,7 +22,9 @@ Rails.application.routes.draw do
     confirmations: 'users/confirmations'
   }
 
-  resources :users
+  resources :users do
+    resources :messages, only: %i[index create]
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

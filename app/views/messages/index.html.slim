@@ -1,0 +1,34 @@
+.row.mx-0.mh-100.w-100
+  .col-sm.overflow-auto.border-end.p-0
+    .ul.list-unstyled
+      - @users.each do |user|
+        li.d-flex
+          - if user.icon_image.attached?
+            =link_to user do
+              =image_tag user.icon_image, size: "77x77",class:"rounded-circle border m-2"
+          - else
+            =link_to user do
+              =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg", size: "77x77",class:"rounded-circle border m-2"
+          =link_to user.display_name,user_messages_path(user),class:"d-flex align-items-center flex-fill link-dark text-decoration-none"
+  -if @user.present?
+    .col-sm.overflow-auto.h-100.p-0
+      .align-self-start.border-bottom
+        =@user.display_name
+      .flex-column.overflow-auto.h-75.border-bottom.pt-2
+        .ul.list-unstyled.px-2
+          -@messages.each do |message|
+            li.mb-2
+              -if message.send_by_id==current_user.id
+                .d-flex.justify-content-end
+                  .border.rounded-pill.p-3.ms-5
+                    =message.content
+              -else
+                .d-flex.justify-content-start
+                  .border.rounded-pill.p-3.me-5
+                    =message.content
+      =form_with model: Message,url:user_messages_path(params[:user_id]),local:true,class:"p-3" do |f|
+        .form-floating
+          =f.text_area :content,class:"form-control form-control-lg border-0 textarea-vertical",rows:100,placeholder:"",maxlength:140, autocomplete: "content",required:true
+          = f.label "新しいメッセージ",class:"text-black-50"
+        .me-5.d-flex.align-items-center
+          =f.submit "送信",class:"btn btn-primary rounded-pill btn-sm"
