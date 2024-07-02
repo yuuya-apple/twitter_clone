@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_30_064359) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_30_142713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -79,6 +79,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_064359) do
     t.index ["follow_to_id"], name: "index_follows_on_follow_to_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.bigint "send_to_id"
+    t.bigint "send_by_id"
+    t.string "content", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["send_by_id"], name: "index_messages_on_send_by_id"
+    t.index ["send_to_id"], name: "index_messages_on_send_to_id"
+  end
+
   create_table "retweets", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "tweet_id"
@@ -141,6 +151,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_30_064359) do
   add_foreign_key "favorites", "users"
   add_foreign_key "follows", "users", column: "follow_by_id"
   add_foreign_key "follows", "users", column: "follow_to_id"
+  add_foreign_key "messages", "users", column: "send_by_id"
+  add_foreign_key "messages", "users", column: "send_to_id"
   add_foreign_key "retweets", "tweets"
   add_foreign_key "retweets", "users"
   add_foreign_key "tweets", "users"
