@@ -1,0 +1,6 @@
+- if user.icon_image.attached?
+  =link_to user do
+    =image_tag user.icon_image, size: "77x77",class:"rounded-circle border m-2"
+- else
+  =link_to user do
+    =image_tag "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7QEZuxLo_zvFCMKLbMyH5pFU-LihRIeLXMY-QHxEMIgeNOVhvKeSMiNsIxrzNFHMsUv0nxYYl_b5RVqLtJcRgJokPMn8IVpkRDKfnrMr1dsoghyXHGXRakLCV1wX0FBGlltS5W34zMGV4/s1600/no_image_square.jpg", size: "77x77",class:"rounded-circle border m-2"
