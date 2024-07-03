@@ -2,6 +2,7 @@
 
 class RetweetsController < ApplicationController
   after_action -> { create_notification(@retweet) }, only: %i[create]
+  include Notify
 
   def create
     @retweet = current_user.retweets.find_or_initialize_by(tweet_id: params[:tweet_id])

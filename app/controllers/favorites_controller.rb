@@ -2,6 +2,7 @@
 
 class FavoritesController < ApplicationController
   after_action -> { create_notification(@favorite) }, only: %i[create]
+  include Notify
 
   def create
     @favorite = current_user.favorites.find_or_initialize_by(tweet_id: params[:tweet_id])
