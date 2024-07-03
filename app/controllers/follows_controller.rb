@@ -3,6 +3,7 @@
 class FollowsController < ApplicationController
   def create
     follow = current_user.follows.find_or_initialize_by(follow_to_id: params[:follow_to])
+    include Notify
 
     if follow.new_record?
       follow.save

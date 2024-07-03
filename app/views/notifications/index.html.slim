@@ -1,0 +1,28 @@
+.list-group.overflow-auto
+  ul.list-unstyled
+    -@notifications.each do |notification|
+      li.border-bottom.d-flex
+        - if notification.notificationable_type.to_sym.equal?(:Favorite)
+          .ms-2.d-flex.align-items-center
+            i.bi.bi-heart-fill.text-danger.fs-1
+          .ms-2.d-flex.align-items-center
+            =render 'layouts/usericon',user:notification.notificationable.user
+          .ms-2.flex-fill.d-flex.align-items-stretch
+            =link_to tweet_path(notification.notificationable.tweet),class:"link-dark text-decoration-none flex-fill d-flex align-items-center" do
+              ="#{notification.notificationable.user.display_name}さんにいいねされました"
+        -elsif notification.notificationable_type.to_sym.equal?(:Retweet)
+          .ms-2.d-flex.align-items-center
+            i.bi.bi-repeat.text-danger.fs-1
+          .ms-2.d-flex.align-items-center
+            =render 'layouts/usericon',user:notification.notificationable.user
+          .ms-2.flex-fill.d-flex.align-items-stretch
+            =link_to tweet_path(notification.notificationable.tweet),class:"link-dark text-decoration-none flex-fill d-flex align-items-center" do
+              ="#{notification.notificationable.user.display_name}さんにリツートされました"
+        -elsif notification.notificationable_type.to_sym.equal?(:Comment)
+          .ms-2.d-flex.align-items-center
+            i.bi.bi-chat.fs-1
+          .ms-2.d-flex.align-items-center
+            =render 'layouts/usericon',user:notification.notificationable.user
+          .ms-2.flex-fill.d-flex.align-items-stretch
+            =link_to tweet_path(notification.notificationable.tweet),class:"link-dark text-decoration-none flex-fill d-flex align-items-center" do
+              ="#{notification.notificationable.user.display_name}さんにコメントされました"

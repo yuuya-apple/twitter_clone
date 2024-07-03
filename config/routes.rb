@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :retweets, only: %i[create]
   resources :follows, only: %i[create]
   resources :messages, only: %i[index]
+  resources :notifications, only: %i[index]
   resources :book_marks, only: %i[create index]
 
   get '/logout', to: 'tweets#index'
