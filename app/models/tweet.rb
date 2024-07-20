@@ -9,6 +9,8 @@ class Tweet < ApplicationRecord
 
   has_one_attached :image
 
+  validates :content, length: { maximum: 140 }
+
   def self.profile_tweets(tab, user_id, page)
     resources = case tab
                 when :favorite
