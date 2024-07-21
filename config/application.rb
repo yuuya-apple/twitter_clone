@@ -25,7 +25,6 @@ module Myapp
                        view_specs: false,
                        helper_specs: false,
                        routing_specs: false
-      g.factory_bot false
     end
     config.action_view.default_form_builder = 'ApplicationFormBuilder'
     config.action_view.field_error_proc = proc { |html_tag| html_tag }
