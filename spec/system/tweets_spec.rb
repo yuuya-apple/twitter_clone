@@ -26,14 +26,9 @@ RSpec.describe 'Tweets', type: :system do
     it '失敗' do
       expect do
         fill_in 'tweet[content]',
-                with: long_content
+                with: 'a' * 141
         click_button 'ツイートする'
       end.to change(user.tweets, :count).by(0)
     end
-  end
-
-  def long_content
-    '111111111122222222223333333334444444444555555555566666666667777777777888888888899999999990000000000
-    11111111112222222222333333333344444444445'
   end
 end
